@@ -1,0 +1,46 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+
+:root {
+  --main-color: #631D76;
+  --main-color-light: #C36DDB;
+  --main-color-dark: #310E3B;
+
+  --pack-dia:rgba(219,151,109, .8);
+  --pack-dia-light: rgba(230,182,153, .7);
+  --pack-cumple: rgba(133,219,109, .8);
+  --pack-cumple-light: rgba(159,227,140, .7);
+
+
+  --main-color-rgb: 99, 29, 118;
+  --main-color-light-rgb: 195, 109, 219;
+  --main-color-dark-rgb: 49, 14, 59;
+
+  --background-light: #f6f6f6;
+  --background-dark: #ebebeb;
+  --background-dark-2: #b3b3b3;
+  --background-dark-3: #1a1a1a;
+
+  --text-light: #F2F2F2;
+  --text-dark: #2D2D2D;
+
+  --test: red;
+}
+
+html{
+  font-size: 62.5%;
+  font-family: 'Lato', sans-serif;
+}
+
+
+

@@ -1,0 +1,142 @@
+.wrapperCheckbox {
+    padding-left: 2rem;
+}
+.checkboxWrapper {
+    width: 12rem;
+    height: 6.5rem;
+    position: relative;
+    margin: 20px auto;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    background: var(--background-light);
+    box-shadow: inset 2px 1px 6px #00000091;
+  }
+  
+  .checkboxWrapper label {
+    position: absolute;
+    left: 60px;
+    top: 4px;
+    width: 56px;
+    height: 56px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    background: var(--background-dark-2);
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+    cursor: pointer;
+  }
+  
+  .checkboxWrapper svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .checkboxWrapper svg path {
+    stroke: var(--background-light);
+    stroke-linecap: round;
+    stroke-width: 4;
+    -webkit-transition: opacity 0.1s;
+    transition: opacity 0.1s;
+    fill: none;
+    -webkit-transition: stroke-dashoffset 0.2s;
+    transition: stroke-dashoffset 0.2s;
+  }
+  
+  .checkboxWrapper .checkmark path {
+    opacity: 0;
+  }
+  
+  .checkboxWrapper .checkmark path:first-child{
+    stroke-dashoffset: 27px;
+  }
+  
+  .checkboxWrapper .checkmark path:last-child{
+    stroke-dashoffset: 11px;
+  }
+  
+  .checkboxWrapper .cross path {
+    opacity: 1;
+    stroke-dashoffset: 0px;
+  }
+  
+  .checkboxWrapper input[type=checkbox] {
+    display: none;
+  }
+  
+  .checkboxWrapper input[type=checkbox]:checked + label {
+    left: 4px;
+    background: var(--main-color);
+  }
+  
+  .checkboxWrapper input[type=checkbox]:checked + label .checkmark path {
+    opacity: 1;
+    stroke-dashoffset: 0px;
+  }
+  
+  .checkboxWrapper input[type=checkbox]:checked + label .cross path {
+    opacity: 0;
+    stroke-dashoffset: 13px;
+  }
+
+  .stroke27{
+    stroke-dasharray: 27px;
+  }
+
+  .stroke11 {
+    stroke-dasharray: 11px;
+  }
+  
+  .stroke13 {
+    stroke-dasharray: 13px;
+  }
+
+  .component-checked {
+    color: var(--main-color);
+    font-weight: 400;
+  }
+
+  .component-name-extras{
+    position: relative;
+    width: 100%;
+    font-size: 3.5rem;
+    font-weight: 400;
+    padding-left: 1.5rem;
+  }
+
+.explanation-extra{
+    font-size: 2rem;
+    padding: 0 2rem 0 
+}
+
+.component-container-extra .component-container {
+    padding: 0;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .wrapperCheckbox {
+    padding-left: 15rem;
+  }
+
+  .component-name-extras{
+    font-size: 5rem;
+    font-weight: 400;
+    padding-left: 2rem;
+  }
+
+.explanation-extra{
+    font-size: 2.5rem;
+    padding: 0 10rem
+  }
+
+
+
+}

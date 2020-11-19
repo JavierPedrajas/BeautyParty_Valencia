@@ -1,0 +1,185 @@
+.packs-section {
+    height: 100vh;
+    
+    height: calc(var(--vh, 1vh) * 100);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--background-light);
+}
+
+.packs-section__container{
+    height: 100%;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    color: var(--text-dark)
+}
+
+.packs-section__container-1,
+.packs-section__container-2,
+.packs-section__container-3{
+    height: 65%;
+    width: 80%;
+    box-shadow: 0 4px 10px black;
+    border-radius: 3px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.pack-section__container-title{
+    font-size: 4rem;
+}
+
+.packs-section__container__textbox{
+    font-size: 1.8rem;
+}
+
+.packs-section__container__textbox span{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.packs-section__container__pricebutton{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+
+}
+
+.packs-section__container__pricebutton-price{
+    font-size: 3rem;
+    font-weight: 300;
+    width: 100%;
+}
+
+.packs-section__container__pricebutton-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin-top: 1rem; */
+}
+
+.right-arrow{
+    margin-top: .2rem;
+    height: 3.5rem;
+    width: 100%;
+}
+
+
+.packs-section__container-1 {
+    background-image: linear-gradient(to right, var(--pack-dia), var(--pack-dia-light)), url('../../assets/hero-pic/dia.jpg');
+    background-position: center bottom;
+    background-size: cover;     
+}
+
+.packs-section__container-2 {
+    background-image: linear-gradient(to right, var(--pack-cumple), var(--pack-cumple-light)), url('../../assets/hero-pic/cumpleanos.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.packs-section__container-3 {
+    background-image: linear-gradient(to right, rgba(var(--main-color-rgb), .8), rgba(var(--main-color-light-rgb), .7)), url('../../assets/hero-pic/noche.jpeg');
+    color: var(--text-light);
+    background-position: center;
+    background-size: cover;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    .packs-section__container{
+        padding: 0;
+
+    }
+
+    .packs-section__container-1,
+    .packs-section__container-2,
+    .packs-section__container-3{
+        height: 60%;
+        width: 50%;
+    }
+
+    .pack-section__container-title{
+        font-size: 5.2rem;
+    }
+    
+    .packs-section__container__textbox{
+        font-size: 2.2rem;
+    }
+    
+    .packs-section__container__textbox span{
+        font-size: 2.7rem;
+    }
+    
+    .packs-section__container__pricebutton{
+        position: relative;
+        height: 6rem
+    }    
+    
+    .packs-section__container__pricebutton-price{
+        font-size: 3.4rem;
+    }
+    
+    .packs-section__container__pricebutton-button{
+        position: absolute;
+        top: -15px;
+        left: 35%;
+
+    }
+    
+    .right-arrow{
+        margin-top: .2rem;
+        height: 4rem;
+        width: 100%;
+    }
+
+
+    @media only screen and (min-width: 1023px) {
+
+        .packs-section {
+            padding: 2rem 5rem;
+            box-sizing: border-box;
+        }
+
+        .packs-section__container{
+            height: 100%;
+            width: 100%;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center ;
+      
+        }
+
+        .pack-section__container-title{
+            width: 50%;
+            padding-right: 2rem;
+        }
+
+        .packs-section__container-1,
+        .packs-section__container-2,
+        .packs-section__container-3{
+            height: 75%;
+            width: 80%;
+        }
+
+
+        .packs-section__container__pricebutton-button{
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            width: 40%;
+    
+        }
+
+    }
+
+
+}

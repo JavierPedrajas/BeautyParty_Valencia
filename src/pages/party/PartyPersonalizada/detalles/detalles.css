@@ -1,0 +1,240 @@
+.detalles-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    padding: 5rem 2rem 0 2rem;
+    height: 80%;
+    
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    font-family: inherit;
+}
+
+.detalles-container input:focus,
+.detalles-container select:focus {
+    outline: none;
+    border: 2px solid var(--main-color-light)
+}
+
+.name-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+    height: 100%;
+}
+
+
+.name-container input {
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    height: 4.8rem;
+    width: 80%;
+    padding-left: 1.5rem;
+    font: inherit;
+    box-shadow: 0px 3px 6px #00000091;
+    text-transform: capitalize;
+}
+
+.name-tag{
+    font-weight: 300;
+    margin-bottom: .2rem;
+}
+
+.ppl-container{
+    height: 100%;
+}
+
+.wrapper{
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--background-light);
+    box-shadow: 0px 3px 6px #00000091;
+    display: flex;
+    width: 20rem;
+    height: 5.5rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .2rem;
+}
+
+
+.minusminus {
+    border: none;
+    background-color: var(--background-light);
+    fill: red;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: all .2s ease-out;
+}
+
+.minusminus:focus {
+    outline: none;
+    border: 2px solid red
+}
+
+.plusplus {
+    border: none;
+    background-color: var(--background-light);
+    fill: green;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all .2s ease-out;
+}
+
+.plusplus:focus {
+    outline: none;
+    border: 2px solid green
+}
+
+
+
+.num {
+    border: none;
+    height: 100%;
+    background-color: var(--background-light);
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: inherit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cities-selector{
+    display: flex;
+}
+
+.detalles-city-container{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    padding: .5rem 1.5rem 1rem 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-main-text{
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.location-secondary-text{
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+
+.plusplus:active {
+    background-color: lightgreen;
+    fill: var(--text-dark)
+}
+
+.minusminus:active {
+    background-color: lightcoral;
+    fill: var(--text-dark)
+}
+
+
+.fecha-input,
+.hora-input {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-field {
+    
+    width: fit-content;
+    min-width: 18rem;
+    border: none;
+    height: 4rem;
+    border-radius: 10px;
+    background-color: var(--background-light);
+    box-shadow: 0px 3px 6px #00000091;
+    padding-left: 1.5rem;
+    font: inherit;
+
+
+}
+
+.hour-field {
+    width: fit-content;
+    border: none;
+    height: 4rem;
+    border-radius: 10px;
+    background-color: var(--background-light);
+    box-shadow: 0px 3px 6px #00000091;
+    padding: 0 1.5rem;
+    font: inherit;
+}
+
+.location-container{
+    height: 100%;
+}
+
+.location-name-container{
+    height: 100%;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+
+
+    .detalles-container{
+        font-size: 2.7rem;
+        padding: 5rem 2rem 0 4rem;
+    }
+
+
+
+
+    .name-container input {
+        height: 5rem;
+        width: 50%;
+
+    }
+       
+    .wrapper{
+        width: 50%;
+        height: 5rem;
+    }
+    
+
+    .num {
+        font-weight: 400;
+        font-size: 4rem;
+    }
+       
+    
+    .location-main-text{
+        font-size: 2.3rem;
+    }
+    
+    .location-secondary-text{
+        font-size: 2.3rem;
+    }
+        
+    .date-field {
+        height: 4.5rem;
+        width: 50%;
+    }
+    
+    .hour-field {
+        height: 4.5rem;
+        width: 50%;
+    }
+}

@@ -1,0 +1,244 @@
+.resumen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+    padding: 0 0 2rem 2rem;
+}
+
+.checkout-list {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    padding-bottom: .5rem;
+}
+
+.intro-resumen {
+    padding: 6rem 0 1rem;
+    font-size: 2.2rem;
+
+}
+
+.checkout-component {
+    /* padding-left: 1rem; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 2.2rem;
+    justify-content: space-between;
+}
+
+.checkout-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-item-name{
+    display: flex;
+    width: 100%;
+    font-size: 2rem;
+}
+
+
+
+.checkout-price {
+    width: 10%; 
+    padding-right: 2.5rem; 
+    text-align: right;
+}
+
+
+.dot-container{
+    width:20%;
+    position: relative;
+}
+
+.resumen-dot{
+    width: .7rem;
+    fill: var(--main-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%)
+}
+
+
+.totales {
+    height: 60%;
+    padding: .5rem 0 3rem 2rem;
+    font-size: 2rem;
+}
+
+.subtotal{
+    display: flex;
+}
+
+.subtotal div{
+    width: 100%;
+}
+
+.subtotal:first-child{
+    width: 100%;
+}
+
+.terms {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+}
+
+.checkout-explanation{
+    font-size: 1.5rem;
+    padding-left: 6rem;
+    font-weight: 300;
+}
+
+.explicaciones {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.4rem;
+    text-align: right;
+    padding: 0 1.2rem 1.2rem .9rem;
+}
+
+.explicacion-1 {
+    padding-bottom: 1rem;
+}
+
+.cbx-container{
+    width: 20%;
+}
+
+.cbx {
+    -webkit-perspective: 20;
+    perspective: 20;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    margin: -12px;
+    border: 2px solid var(--background-dark-2);
+    background: var(--background-light);
+    border-radius: 4px;
+    transform: translate3d(0, 0, 0);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* box-shadow: 0px 2px 6px #00000091; */
+  }
+  .cbx:hover {
+    border-color: var(--main-color)
+  }
+  .flip {
+    display: block;
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+  #cbx {
+    display: none;
+  }
+  #cbx:checked + .cbx {
+    border-color: var(--main-color);
+  }
+  #cbx:checked + .cbx .flip {
+    transform: rotateY(180deg);
+  }
+  .front,
+  .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+  }
+  .front {
+    background: var(--background-light);
+    z-index: 1;
+  }
+  .back {
+    transform: rotateY(180deg);
+    background: var(--main-color);
+    text-align: center;
+    color: var(--background-light);
+    line-height: 20px;
+    box-shadow: 0 0 0 1px var(--main-color);
+  }
+  .back svg {
+    margin-top: 3px;
+    fill: none;
+  }
+  .back svg path {
+    stroke: var(--background-light);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+.tyc {
+    width: 100%;
+    font-size: 1.9rem;
+}
+
+.buttonTyc{
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.buttonTyc:hover{
+    text-decoration: underline var(--main-color) ;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .intro-resumen {
+    font-size: 2.5rem;
+  }
+
+  .checkout-component {
+    font-size: 2.5rem;
+
+  }
+
+
+  .checkout-item-name{
+    font-size: 2.4rem;
+    font-weight: 300;
+  }
+
+
+
+  .resumen-dot{
+    width: 1.3rem;
+  }
+
+
+  .totales {
+    height: 60%;
+    padding: 0 0 1.5rem 40%;
+    font-size: 2.3rem;
+  }
+
+  .tyc {
+    font-size: 2.1rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .cbx {
+
+    top: 30%;
+    left: 13%;
+    margin: -12px;
+  }
+
+}

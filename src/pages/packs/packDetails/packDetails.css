@@ -1,0 +1,148 @@
+.pack-section{
+    height: 100vh;
+    
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.pack-dia__details-container,
+.pack-cumple__details-container,
+.pack-noche__details-container {
+    height: 15%;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--text-dark);
+}
+
+.pack-dia__details-container{
+    background-image: linear-gradient(to right, var(--pack-dia), var(--pack-dia-light)), url('../../../assets/hero-pic/dia.jpg');
+    background-position: center bottom;
+    background-size: cover;
+}
+
+.pack-cumple__details-container{
+    background-image: linear-gradient(to right, var(--pack-cumple), var(--pack-cumple-light)), url('../../../assets/hero-pic/cumpleanos.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.pack-noche__details-container {
+    background-image: linear-gradient(to right, rgba(var(--main-color-rgb), .8), rgba(var(--main-color-light-rgb), .7)), url('../../../assets/hero-pic/noche.jpeg');
+    color: var(--text-light);
+    background-position: center;
+    background-size: cover;
+}
+
+.pack-noche__details-container h2 {
+    color: var(--text-light)
+}
+
+.wrapper-gift {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.regalo {
+    width: 75%;
+    color: var(--main-color);
+    font-size: 1.6rem;
+    padding: 0 1.2rem;
+    text-align: left;
+}
+
+.regalo-not-selected{
+    width: 75%;
+    color: var(--main-color-light);
+    font-size: 1.3rem;
+    padding: 0 0 0 1.2rem;
+    text-align: left;
+}
+
+.wrapper-packs{
+    position: relative;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--background-light);
+    box-shadow: 0px 3px 6px #00000091;
+    display: flex;
+    width: 100%;
+    height: 5.5rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .2rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    .pack-dia__details-container,
+    .pack-cumple__details-container,
+    .pack-noche__details-container {
+        height: 20%;
+}
+
+    
+    .pack-dia__details-container{
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .pack-cumple__details-container{
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .pack-noche__details-container {
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .pack-noche__details-container h2 {
+        color: var(--text-light)
+    }
+    
+    .wrapper-gift {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .regalo {
+        width: 70%;
+        color: var(--main-color);
+        font-size: 1.8rem;
+        padding: 0 1rem;
+        text-align: right;
+    }
+    
+    .wrapper-packs{
+        position: relative;
+        border: none;
+        border-radius: 10px;
+        background-color: var(--background-light);
+        box-shadow: 0px 3px 6px #00000091;
+        display: flex;
+        width: 72%;
+        height: 5.5rem;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: .2rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+

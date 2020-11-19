@@ -1,0 +1,314 @@
+.party-main {
+    height: 100vh;
+    
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-dark);
+    position: relative;
+    color: var(--text-dark)
+}
+
+.party-header {
+    height: 15%;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--text-dark);
+
+}
+
+.party-header__text{
+    font-size: 3rem;
+    color: var(--text-dark);
+    padding: 0 1rem 0 2rem;
+}
+
+.step-box {
+    width: 100%;
+    position: absolute;
+    top: 14.3%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: space-evenly;   
+}
+
+
+.step {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--background-light);
+    border-radius: 100%;
+    box-shadow: 0px 3px 6px #00000091;
+    position: relative;
+    border:none;
+    transition: all .3s;
+    cursor: not-allowed;
+}
+
+.step-selectable {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--background-light);
+    border-radius: 100%;
+    box-shadow: 0px 3px 6px #00000091;
+    position: relative;
+    border:none;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.step-selected {
+    width: 6rem;
+    height: 6rem;
+    background-color: var(--background-light);
+    border-radius: 100%;
+    box-shadow: 0px 3px 6px var(--main-color);
+    position: relative;
+    transform: translateY(-4px);
+    border: 2px solid var(--main-color);
+    transition: all .3s;
+}
+
+.step-completed {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--main-color);
+    border-radius: 100%;
+    box-shadow: 0px 3px 6px #00000091;
+    position: relative;
+    border: 2px solid var(--main-color-light);
+    cursor: pointer;
+}
+
+
+.step-icon {
+    width: 68%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all .5s;
+}
+
+.step-icon-selected {
+    width: 70%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    fill: var(--main-color);
+    transition: all .5s;
+    
+}
+
+.step-icon-completed  {
+    width: 68%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    fill:var(--text-light)
+}
+
+
+.party-creator{
+    height: 80%;
+    background-color: var(--background-dark);
+ 
+}
+
+.party-creator .component-container:first-child {
+    padding-top: 6rem;
+}
+
+
+.component-container{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    padding: 1rem 2rem 1rem 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.component-name{
+    position: relative;
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-left: 2rem;
+}
+
+.component-price {
+    /* width: 100%; */
+    font-size: 2.5rem;
+}
+
+.component-container{
+    margin: auto;
+
+}
+ .btn-radio {
+	 cursor: pointer;
+	 -webkit-user-select: none;
+     user-select: none;
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+}
+ .btn-radio:not(:first-child) {
+	 margin-left: 20px;
+}
+
+ .btn-radio svg {
+    width: 2rem; 
+    height: 2rem;
+	fill: none;
+    margin-left: 2rem;
+    margin-top: .1rem;
+    vertical-align: middle;
+}
+ .btn-radio svg circle {
+	 stroke-width: 2;
+     stroke: var(--background-dark-2);
+
+}
+ .btn-radio svg path {
+	 stroke: var(--main-color);
+}
+ .btn-radio svg path.inner {
+	 stroke-width: 6;
+	 stroke-dasharray: 19;
+	 stroke-dashoffset: 19;
+}
+ .btn-radio svg path.outer {
+	 stroke-width: 2;
+	 stroke-dasharray: 57;
+	 stroke-dashoffset: 57;
+}
+ .btn-radio input {
+	 display: none;
+}
+ .btn-radio input:checked + svg path {
+	 transition: all 0.4s ease;
+}
+ .btn-radio input:checked + svg path.inner {
+	 stroke-dashoffset: 38;
+	 transition-delay: 0.3s;
+}
+ .btn-radio input:checked + svg path.outer {
+	 stroke-dashoffset: 0;
+}
+
+.btn-radio input:checked ~ .component-name {
+    color: var(--main-color);
+    font-weight: 400;
+}
+
+.btn-radio input:checked ~ .component-price {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+.button-container {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.estetica-container{
+    padding-top: 6rem
+}
+
+.estetica-container span {
+    font-size: 2.3rem;
+}
+
+.esteticaCara,
+.esteticaUñas {
+    padding-left: 2rem;
+    font-size: 2rem;
+}
+
+
+.parties{
+    height: 80%;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .party-header__text{
+        font-size: 3.7rem;
+    }
+    
+    .step-box {
+        top: 13%;
+    }
+    
+    
+    .step {
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+    
+    .step-selectable {
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+    
+    .step-selected {
+        width: 9rem;
+        height: 9rem;
+        transform: translateY(-9px);
+    }
+    
+    .step-completed {
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+    
+    .party-creator .component-container:first-child {
+        padding-top: 8rem;
+    }
+    
+    
+    .component-container{
+        padding: 2rem 2rem 2rem 5rem;
+    }
+    
+    .component-name{
+        font-size: 3.5rem;
+    }
+    
+       
+    .btn-radio svg {
+       transform: scale(1.9);
+       padding-top: .7rem;
+       margin-top: 0;
+    }
+    
+    .button-container {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .estetica-container{
+        padding-top: 6rem
+    }
+    
+    .estetica-container span {
+        font-size: 3rem;
+    }
+    
+
+}

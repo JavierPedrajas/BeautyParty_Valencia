@@ -1,0 +1,61 @@
+.party-portada {
+    height: 100vh;
+    
+    height: calc(var(--vh, 1vh) * 100);
+    background-image: linear-gradient(to right bottom, rgba(var(--main-color-dark-rgb), .9),  rgba(var(--main-color-light-rgb), .5)), url('../../assets/hero-pic/notHero.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 2rem 2rem;
+    color: var(--text-light)
+}
+
+.portada-header {
+    height: 40%;
+    font-size: 3.5rem;
+}
+
+
+.portada-main{
+    height: 50%;
+    font-size: 3rem;
+}
+
+.portada-main_text,
+.portada-secondary_text{
+    padding-bottom: 2rem;
+}
+
+.portada-secondary{
+    height: 50%;
+    font-size: 2.9rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .portada-header {
+        height: 40%;
+        font-size: 5rem;
+    }
+    
+    
+    .portada-main{
+        height: 50%;
+        font-size: 4rem;
+    }
+    
+    .portada-main_text,
+    .portada-secondary_text{
+        padding-bottom: 2rem;
+    }
+    
+    .portada-secondary{
+        height: 50%;
+        font-size: 4rem;
+    }
+    
+}
