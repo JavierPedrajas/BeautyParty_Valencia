@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './PartyPersonalizada.css'
 import axios from 'axios'
 
 
-import { SvgPelo, SvgEstetica, SvgComplementos, SvgDetalles, SvgExtras, SvgResumen} from '../../../assets/svg/svg'
+import { SvgPelo, SvgEstetica, SvgComplementos, SvgDetalles, SvgExtras, SvgResumen } from '../../../assets/svg/svg'
 
 import LoadingSpinner from '../../../UI/loadingSpinner/loadingSpinner'
 
@@ -19,62 +19,35 @@ import { ButtonPrev, ButtonNext } from '../../../components/button/button'
 
 const PartyPersonalizada = (props) => {
 
-        // STATE DECLARATION //
+    // STATE DECLARATION //
 
-    const [currParty, setCurrParty] = useState('loading')
+    const [data, setData] = useState()
+    const [current, setCurrent] = useState('loading')
+    const [selected, setSelected] = useState(
+        {
+            pelo: '',
+            esteticaCara: '',
+            esteticaUñas: '',
+            complementosBebida: '',
+            complementosComida: '',
+            complementosTodo: '',
+            extrasAnfitrion: '',
+            extrasEspectaculo: '',
+            terms: '',
+        }
+    )
+    const [details, setDetails] = useState(
+        {
+            location: '',
+            name: '',
+            people: '',
+            date: '',
+            hour: '',
+            weekDay: ''
+        }
+    )
 
-    const [pelo, setPelo] = useState();
-    const [esteticaCara, setEsteticaCara] = useState();
-    const [esteticaUñas, setEsteticaUñas] = useState();
-    const [complementosComida, setComplementosComida] = useState();
-    const [complementosBebida, setComplementosBebida] = useState();
-    const [complementosTodo, setComplementosTodo] = useState();
-    const [extrasAnfitrion, setExtrasAnfitrion] = useState();
-    const [extrasEspectaculo, setExtrasEspectaculo] = useState();
-
-
-    const [location, setLocation] = useState('');
-    const [name, setName] = useState('')
-    const [people, setPeople] = useState('')
-    const [date, setDate] = useState('')
-    const [hour, setHour] = useState('')
-
-    const [weekDay, setWeekDay] = useState()
-
-
-
-    const [peloSelected, setPeloSelected] = useState('');
-
-    const [esteticaCaraSelected, setEsteticaCaraSelected] = useState('');
-    const [esteticaUñasSelected, setEsteticaUñasSelected] = useState('');
-
-    const [complementosBebidaSelected, setComplementosBebidaSelected] = useState('');
-    const [complementosComidaSelected, setComplementosComidaSelected] = useState('');
-    const [complementosTodoSelected, setComplementosTodoSelected] = useState('');
-
-    const [extrasAnfitrionSelected, setExtrasAnfitrionSelected] = useState('');
-    const [extrasEspectaculoSelected, setExtrasEspectaculoSelected] = useState('');
-
-    const [termsSelected, setTermsSelected] = useState ('')
-
-
-
-    // DEMO TO TEST RESUMEN
-    // const [location, setLocation] = useState('Valencia');
-    // const [name, setName] = useState('Javier Pedrajas')
-    // const [people, setPeople] = useState('7')
-    // const [peloSelected, setPeloSelected] = useState('Peinado en seco,10,blablabla');
-    // const [esteticaCaraSelected, setEsteticaCaraSelected] = useState('Limpieza Facial,10');
-    // const [esteticaUñasSelected, setEsteticaUñasSelected] = useState('Manicura Express,10');
-    // const [complementosBebidaSelected, setComplementosBebidaSelected] = useState('');
-    // const [complementosComidaSelected, setComplementosComidaSelected] = useState('');
-    // const [complementosTodoSelected, setComplementosTodoSelected] = useState('Catering de la Casa,10');
-    // const [extrasAnfitrionSelected, setExtrasAnfitrionSelected] = useState('Anfitrion,10');
-    // const [extrasEspectaculoSelected, setExtrasEspectaculoSelected] = useState('');
-
-
-
-        // VARIABLE DECLARATION //
+    // VARIABLE DECLARATION //
 
 
 
@@ -84,8 +57,8 @@ const PartyPersonalizada = (props) => {
     let displayArray
     let disableNext
 
-    let dateDateFormat = date ? new Date(date) : ''
-    let dateSummaryFormat = date ? dateDateFormat.getDate() + '/' + (dateDateFormat.getMonth() + 1) + '/' + dateDateFormat.getFullYear() : ''
+    let dateDateFormat = details.date ? new Date(details.date) : ''
+    let dateSummaryFormat = details.date ? dateDateFormat.getDate() + '/' + (dateDateFormat.getMonth() + 1) + '/' + dateDateFormat.getFullYear() : ''
 
 
     let whatIsSelectedPelo
@@ -100,129 +73,122 @@ const PartyPersonalizada = (props) => {
     let whatIsSelectedAnfitrion
     let whatIsSelectedEspectaculo
 
-    const totalPersona = 
-    Math.round((
-    parseInt(peloSelected.split(',')[1]) + 
-    parseInt(esteticaCaraSelected.split(',')[1]) + 
-    parseInt(esteticaUñasSelected.split(',')[1]) +
-    (complementosTodoSelected ? parseInt(complementosTodoSelected.split(',')[1]) : 
-    parseInt(complementosBebidaSelected.split(',')[1]) +
-    parseInt(complementosComidaSelected.split(',')[1])) + 
-    (extrasAnfitrionSelected ? parseInt(extrasAnfitrionSelected.split(',')[1]) : 0) +
-    (extrasEspectaculoSelected ? parseInt(extrasEspectaculoSelected.split(',')[1]) : 0)) * 100) / 100
-    
+    const totalPersona =
+        Math.round((
+            parseInt(selected.pelo.split(',')[1]) +
+            parseInt(selected.esteticaCara.split(',')[1]) +
+            parseInt(selected.esteticaUñas.split(',')[1]) +
+            (selected.complementosTodo ? parseInt(selected.complementosTodo.split(',')[1]) :
+                parseInt(selected.complementosBebida.split(',')[1]) +
+                parseInt(selected.complementosComida.split(',')[1])) +
+            (selected.extrasAnfitrion ? parseInt(selected.extrasAnfitrion.split(',')[1]) : 0) +
+            (selected.extrasEspectaculo ? parseInt(selected.extrasEspectaculo.split(',')[1]) : 0)) * 100) / 100
+
     // GET ITEMS FROM FIREBASE
 
-    useEffect ( () => {
+    useEffect(() => {
         axios.get("https://beautyparty-valencia.firebaseio.com/.json")
-        .then( res => {
-            setPelo(res.data.pelo)
-            setCurrParty('pelo')
-            setEsteticaCara(res.data.esteticaCara)
-            setEsteticaUñas(res.data.esteticaUñas)
-            setComplementosBebida(res.data.complementosBebida)
-            setComplementosComida(res.data.complementosComida)
-            setComplementosTodo(res.data.complementosTodo)
-            setExtrasAnfitrion(res.data.extrasAnfitrion)
-            setExtrasEspectaculo(res.data.extrasEspectaculo)
+            .then(res => {
+                setData(res.data)
+                setCurrent('pelo')
 
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, []);
 
 
     // Changes city selected
 
     const updateLocationValencia = () => {
-        setLocation('Valencia')
+        setDetails({...details, location: 'Valencia'})
     }
     const updateLocationLliria = () => {
-        setLocation('Lliria')
+        setDetails({...details, location: 'Lliria'})
     }
 
 
 
     // Changes name stored
-    const updateName = (e) => {
-        setName(e.target.value)
+    const updateName = e => {
+        setDetails({...details, name: e.target.value})
     }
 
 
     // Changes people selected
-    const updatePeople = (e) => {
-        setPeople(parseInt(e.target.value))
+    const updatePeople = e => {
+        setDetails({...details, people: parseInt(e.target.value)})
     }
 
-    const updateHora = (e) => {
-        setHour(e.target.value)
+    const updateHora = e => {
+        setDetails({...details, hour: e.target.value})
     }
 
-     const updateFecha = (e) => {
+    const updateFecha = e => {
         const dateS = new Date(e.target.valueAsDate)
-        setWeekDay(dateS.getDay())
-        setDate(e.target.value)
+        setDetails({...details, date: e.target.value, weekDay: dateS.getDay()})
     }
 
     // PLUS AND MINUS HANDLER FOR PEOPLE NUMBER
     const handlePlus = () => {
-        if (people < 4) {
-            setPeople(4)
-        } else if (people < 10) {
-            setPeople(parseInt(people) + 1)
-        } else if (people > 10) {
-            setPeople(10)
+        if (details.people < 4) {
+            setDetails({...details, people: 4})
+        } else if (details.people < 10) {
+            setDetails({...details, people: parseInt(details.people) + 1})
+        } else if (details.people > 10) {
+            setDetails({...details, people: 10})
         }
     }
-    
+
     const handleMinus = () => {
-        if (people < 5) {
-            setPeople(4)
-        } else if (people > 10) {
-            setPeople(10)
-        } else if (people >= 5) {
-            setPeople(parseInt(people) - 1)
-        } 
+        if (details.people < 5) {
+            setDetails({...details, people: 4})
+        } else if (details.people > 10) {
+            setDetails({...details, people: 10})
+        } else if (details.people >= 5) {
+            setDetails({...details, people: parseInt(details.people) - 1})
+        }
     }
 
     const sendWhatsapp = () => {
         // %0A SALTO DE LINEA
         // %E2%86%92 FLECHA A DERECHA
-        const nameString = encodeURIComponent('Hola, soy ' + name + '.')
-        const peloString = encodeURIComponent('- ' + peloSelected.split(',')[0] + ' → ' + peloSelected.split(',')[1] + '€')
-        const esteticaUñasString = encodeURIComponent('- ' + esteticaUñasSelected.split(',')[0] + ' → ' + esteticaUñasSelected.split(',')[1] + '€')
-        const esteticaCaraString = encodeURIComponent('- ' + esteticaCaraSelected.split(',')[0] + ' → ' + esteticaCaraSelected.split(',')[1] + '€')
-        const complementosString = complementosTodoSelected === '' ? 
-        encodeURIComponent('- ' + complementosBebidaSelected.split(',')[0] + ' → ' + complementosBebidaSelected.split(',')[1] + '€') + '%0A' + 
-        encodeURIComponent('- ' + complementosComidaSelected.split(',')[0] + ' → ' + complementosComidaSelected.split(',')[1] + '€') :
-        encodeURIComponent('- ' + complementosTodoSelected.split(',')[0] + ' → ' + complementosTodoSelected.split(',')[1] + '€')
-        const extrasString = 
-        (extrasAnfitrionSelected !== '' ? 
-        encodeURIComponent('- ' + extrasAnfitrionSelected.split(',')[0] + ' → ' + extrasAnfitrionSelected.split(',')[1] + '€') + '%0A' : '') + 
-        (extrasEspectaculoSelected !== '' ? encodeURIComponent('- ' + extrasEspectaculoSelected.split(',')[0] + ' → ' + extrasEspectaculoSelected.split(',')[1] + '€') : '')
-        const totalString = encodeURIComponent('El total de la fiesta es de ' + totalPersona*people + '€')
-        const localizacion = location === 'Valencia' ? 'Paul Mitchell Valencia' : 'Nou Calasanz Lliria'
-        const detallesString = encodeURIComponent('Seremos ' + people + ' personas.') + '%0A' + encodeURIComponent('En las instalaciones de ' + localizacion) + '%0A' + encodeURIComponent('Nos gustaría reservar para el día ' + dateSummaryFormat + ' en horario de ' + hour + '.')
-        
+        const nameString = encodeURIComponent('Hola, soy ' + details.name + '.')
+        const peloString = encodeURIComponent('- ' + selected.pelo.split(',')[0] + ' → ' + selected.pelo.split(',')[1] + '€')
+        const esteticaUñasString = encodeURIComponent('- ' + selected.esteticaUñas.split(',')[0] + ' → ' + selected.esteticaUñas.split(',')[1] + '€')
+        const esteticaCaraString = encodeURIComponent('- ' + selected.esteticaCara.split(',')[0] + ' → ' + selected.esteticaCara.split(',')[1] + '€')
+        const complementosString = selected.complementosTodo === '' ?
+            encodeURIComponent('- ' + selected.complementosBebida.split(',')[0] + ' → ' + selected.complementosBebida.split(',')[1] + '€') + '%0A' +
+            encodeURIComponent('- ' + selected.complementosComida.split(',')[0] + ' → ' + selected.complementosComida.split(',')[1] + '€') :
+            encodeURIComponent('- ' + selected.complementosTodo.split(',')[0] + ' → ' + selected.complementosTodo.split(',')[1] + '€')
+        const extrasString =
+            (selected.extrasAnfitrion !== '' ?
+                encodeURIComponent('- ' + selected.extrasAnfitrion.split(',')[0] + ' → ' + selected.extrasAnfitrion.split(',')[1] + '€') + '%0A' : '') +
+            (selected.extrasEspectaculo !== '' ? encodeURIComponent('- ' + selected.extrasEspectaculo.split(',')[0] + ' → ' + selected.extrasEspectaculo.split(',')[1] + '€') : '')
+        const totalString = encodeURIComponent('El total de la fiesta es de ' + totalPersona * details.people + '€')
+        const localizacion = details.location === 'Valencia' ? 'Paul Mitchell Valencia' : 'Nou Calasanz Lliria'
+        const detallesString = encodeURIComponent('Seremos ' + details.people + ' personas.') + '%0A' + encodeURIComponent('En las instalaciones de ' + localizacion) + '%0A' + encodeURIComponent('Nos gustaría reservar para el día ' + dateSummaryFormat + ' en horario de ' + details.hour + '.')
+
 
         window.open(`https://wa.me/34608055822?text=${nameString}%0AEste%20es%20el%20resumen%20de%20mi%20fiesta%3A%0A${peloString}%0A${esteticaUñasString}%0A${esteticaCaraString}%0A${complementosString}%0A${extrasString}%0A${totalString}%0A${detallesString}%0AQuedamos+a+la+espera+de+confirmaci%C3%B3n+y+detalles`)
 
-        axios.put(`https://beautyparty-valencia.firebaseio.com/sesiones/${name + ' - ' + dateSummaryFormat.replaceAll('/', '-') + ' - Personalizada'}.json`, 
-            {pelo: peloString,
-            referencia: props.referencia,
-            esteticaUñas: esteticaUñasString,
-            esteticaCara: esteticaCaraString,
-            complementos: complementosTodoSelected === '' ? complementosComidaSelected +  complementosBebidaSelected : complementosTodoSelected,
-            nombre: name,
-            personas: people,
-            localizacion: location,
-            extras: extrasAnfitrionSelected + extrasEspectaculoSelected,
-            importe: totalPersona * people,
-            fecha: dateSummaryFormat,
-            hora: hour
+        axios.put(`https://beautyparty-valencia.firebaseio.com/sesiones/${details.name + ' - ' + dateSummaryFormat.replaceAll('/', '-') + ' - Personalizada'}.json`,
+            {
+                pelo: peloString,
+                referencia: props.referencia,
+                esteticaUñas: esteticaUñasString,
+                esteticaCara: esteticaCaraString,
+                complementos: selected.complementosTodo === '' ? selected.complementosComida + selected.complementosBebida : selected.complementosTodo,
+                nombre: details.name,
+                personas: details.people,
+                localizacion: details.location,
+                extras: selected.extrasAnfitrion + selected.extrasEspectaculo,
+                importe: totalPersona * details.people,
+                fecha: dateSummaryFormat,
+                hora: details.hour
             })
-            .then( res => {
+            .then(res => {
             })
             .catch(err => {
             })
@@ -231,52 +197,54 @@ const PartyPersonalizada = (props) => {
 
     // UPDATES STATE TO RENDER NEXT PAGE
     const moveToNextPage = () => {
-        currParty === 'resumen' ? sendWhatsapp() : setCurrParty(nextPage)
+        current === 'resumen' ? sendWhatsapp() : setCurrent(nextPage)
     }
 
     // UPDATES STATE TO RENDER PREV PAGE
     const moveToPrevPage = () => {
-        currParty === 'pelo' || currParty === 'loading' ? props.goToPortada() : setCurrParty(prevPage)
+        current === 'pelo' || current === 'loading' ? props.goToPortada() : setCurrent(prevPage)
     }
 
-    
+
 
 
     // STORES THE SELECTED VALUE
-    const storeSelectedValue = (e) => {
+    const storeSelectedValue = e => {
         const currentObject = e.target.value
 
         switch (e.target.name) {
             case "pelo":
-                setPeloSelected(currentObject)
+                setSelected({ ...selected, pelo: currentObject })
                 break
             case "esteticaCara":
-                setEsteticaCaraSelected(currentObject)
+                setSelected({ ...selected, esteticaCara: currentObject })
                 break
             case "esteticaUñas":
-                setEsteticaUñasSelected(currentObject)
+                setSelected({ ...selected, esteticaUñas: currentObject })
                 break
             case "complementosBebida":
-                setComplementosBebidaSelected(currentObject)
-                setComplementosTodoSelected('')
+                setSelected({ ...selected, complementosBebida: currentObject, complementosTodo: '' })
                 break
             case "complementosComida":
-                setComplementosComidaSelected(currentObject)
-                setComplementosTodoSelected('')
+                setSelected({ ...selected, complementosComida: currentObject, complementosTodo: '' })
                 break
             case "complementosTodo":
-                setComplementosTodoSelected(currentObject)
-                setComplementosComidaSelected('')
-                setComplementosBebidaSelected('')
+                setSelected({ ...selected, complementosTodo: currentObject, complementosBebida: '', complementosComida: '' })
                 break
             case "extrasAnfitrion":
-                extrasAnfitrionSelected ? setExtrasAnfitrionSelected('') : setExtrasAnfitrionSelected(currentObject)
+                selected.extrasAnfitrion ?
+                    setSelected({ ...selected, extrasAnfitrion: '' }) :
+                    setSelected({ ...selected, extrasAnfitrion: currentObject })
                 break
             case "extrasEspectaculo":
-                extrasEspectaculoSelected ? setExtrasEspectaculoSelected('') : setExtrasEspectaculoSelected(currentObject)
+                selected.extrasEspectaculo ?
+                    setSelected({ ...selected, extrasEspectaculo: '' }) :
+                    setSelected({ ...selected, extrasEspectaculo: currentObject })
                 break
             case "terms":
-                termsSelected ? setTermsSelected('') : setTermsSelected(currentObject)
+                selected.terms ?
+                    setSelected({ ...selected, terms: '' }) :
+                    setSelected({ ...selected, terms: currentObject })
                 break
             default: console.log('error')
         }
@@ -284,277 +252,277 @@ const PartyPersonalizada = (props) => {
 
 
     // SWITCH STATEMENT TO SET DIFFERENT PARAMETERS
-    switch (currParty) {
+    switch (current) {
         case 'loading':
             disableNext = true
-        break
-        case 'pelo': 
-        header = '¿Qué hacemos con vuestro pelo?' // Header for the section
-        prevPage = '' // Change to previous page
-        nextPage = 'estetica' // Change to next page
-        disableNext = peloSelected ? false : true // is next disabled?
-        whatIsSelectedPelo = peloSelected ? peloSelected.split(',')[0] : '' // To check if radio was proviously selected
-        break;
+            break
+        case 'pelo':
+            header = '¿Qué hacemos con vuestro pelo?' // Header for the section
+            prevPage = '' // Change to previous page
+            nextPage = 'estetica' // Change to next page
+            disableNext = selected.pelo ? false : true // is next disabled?
+            whatIsSelectedPelo = selected.pelo ? selected.pelo.split(',')[0] : '' // To check if radio was proviously selected
+            break;
 
-        case 'estetica': 
-        header = 'Maquillaje, manicura...¡Tú mandas!'
-        prevPage = 'pelo'
-        nextPage = 'complementos'
-        disableNext = esteticaCaraSelected && esteticaUñasSelected ? false : true
-        whatIsSelectedCara = esteticaCaraSelected ? esteticaCaraSelected.split(',')[0] : ''
-        whatIsSelectedUñas = esteticaUñasSelected ? esteticaUñasSelected.split(',')[0] : ''
-        break;
+        case 'estetica':
+            header = 'Maquillaje, manicura...¡Tú mandas!'
+            prevPage = 'pelo'
+            nextPage = 'complementos'
+            disableNext = selected.esteticaCara && selected.esteticaUñas ? false : true
+            whatIsSelectedCara = selected.esteticaCara ? selected.esteticaCara.split(',')[0] : ''
+            whatIsSelectedUñas = selected.esteticaUñas ? selected.esteticaUñas.split(',')[0] : ''
+            break;
 
-        case 'complementos': 
-        header = 'No es una buena fiesta sin un buen picoteo'
-        prevPage = 'estetica'
-        nextPage = 'detalles'
-        disableNext = (complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected ? false : true
-        whatIsSelectedBebida = complementosBebida ? complementosBebidaSelected.split(',')[0] : ''
-        whatIsSelectedComida = complementosComida ? complementosComidaSelected.split(',')[0] : ''
-        whatIsSelectedTodo = complementosTodo ? complementosTodoSelected.split(',')[0] : ''
-        break;
+        case 'complementos':
+            header = 'No es una buena fiesta sin un buen picoteo'
+            prevPage = 'estetica'
+            nextPage = 'detalles'
+            disableNext = (selected.complementosBebida && selected.complementosComida) || selected.complementosTodo ? false : true
+            whatIsSelectedBebida = data ? selected.complementosBebida.split(',')[0] : ''
+            whatIsSelectedComida = data ? selected.complementosComida.split(',')[0] : ''
+            whatIsSelectedTodo = data ? selected.complementosTodo.split(',')[0] : ''
+            break;
 
-        case 'detalles': 
-        header = 'Necesitamos algún detallito más'
-        prevPage = 'complementos'
-        nextPage = 'extras'
-        disableNext = name && people >= 4 && people <= 10 && location && date && hour ? false : true
-        break;
+        case 'detalles':
+            header = 'Necesitamos algún detallito más'
+            prevPage = 'complementos'
+            nextPage = 'extras'
+            disableNext = details.name && details.people >= 4 && details.people <= 10 && details.location && details.date && details.hour ? false : true
+            break;
 
         case 'extras':
-        header = 'Solo nos falta poner la guinda...'
-        prevPage = 'detalles'
-        nextPage = 'resumen'
-        disableNext = false
-        whatIsSelectedAnfitrion = extrasAnfitrion ? extrasAnfitrionSelected.split(',')[0] : ''
-        whatIsSelectedEspectaculo = extrasEspectaculo ? extrasEspectaculoSelected.split(',')[0] : ''
-        break;
+            header = 'Solo nos falta poner la guinda...'
+            prevPage = 'detalles'
+            nextPage = 'resumen'
+            disableNext = false
+            whatIsSelectedAnfitrion = data ? selected.extrasAnfitrion.split(',')[0] : ''
+            whatIsSelectedEspectaculo = data ? selected.extrasEspectaculo.split(',')[0] : ''
+            break;
 
-        case 'resumen': 
-        header = '¡Ya está! Revisa tu fiesta'
-        prevPage = 'extras'
-        nextPage = ''
-        disableNext = termsSelected ? false : true
-        break;
-        
+        case 'resumen':
+            header = '¡Ya está! Revisa tu fiesta'
+            prevPage = 'extras'
+            nextPage = ''
+            disableNext = selected.terms ? false : true
+            break;
+
         default: header = 'Cargando fiesta...'
     }
 
-    const esteticaDisplayArray = 
-    <div className='estetica-container'>
-        <span className='esteticaCara'>Estética facial</span>
-        <EsteticaCara 
-            propsEsteticaCara={esteticaCara}
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedCara}
-        />
+    const esteticaDisplayArray =
+        <div className='estetica-container'>
+            <span className='esteticaCara'>Estética facial</span>
+            <EsteticaCara
+                propsEsteticaCara={data ? data.esteticaCara : ''}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedCara}
+            />
 
-        <span className='esteticaUñas'>Manicura</span>
-        <EsteticaUñas
-            propsEsteticaUñas={esteticaUñas}
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedUñas}
-        />
-    </div>
+            <span className='esteticaUñas'>Manicura</span>
+            <EsteticaUñas
+                propsEsteticaUñas={data ? data.esteticaUñas : ''}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedUñas}
+            />
+        </div>
 
-    const complementosDisplayArray = 
-    <div className='estetica-container'>
-        <span className='esteticaCara'>¿Algo de picar?</span>
-        <ComplementosComida 
-            propsComplementosComida={complementosComida}
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedComida}
-        />
+    const complementosDisplayArray =
+        <div className='estetica-container'>
+            <span className='esteticaCara'>¿Algo de picar?</span>
+            <ComplementosComida
+                propsComplementosComida={data ? data.complementosComida : ''}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedComida}
+            />
 
-        <span className='esteticaUñas'>¿Qué quereis beber?</span>
-        <ComplementosBebida 
-            propsComplementosBebida={complementosBebida} 
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedBebida}
-        />
+            <span className='esteticaUñas'>¿Qué quereis beber?</span>
+            <ComplementosBebida
+                propsComplementosBebida={data ? data.complementosBebida : ''}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedBebida}
+            />
 
-        <span className='esteticaUñas'>¡Nosotros nos encargamos!</span>
-        <ComplementosTodo 
-            propsComplementosTodo={complementosTodo} 
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedTodo}
-        />
-    </div>
+            <span className='esteticaUñas'>¡Nosotros nos encargamos!</span>
+            <ComplementosTodo
+                propsComplementosTodo={data ? data.complementosTodo : ''}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedTodo}
+            />
+        </div>
 
     const extrasDisplayArray =
-    <div>
-        <ExtrasAnfitrion 
-        handleStoreSelected={storeSelectedValue}
-        propsExtrasAnfitrion={extrasAnfitrion}
-        isSelected={whatIsSelectedAnfitrion}/>
+        <div>
+            <ExtrasAnfitrion
+                handleStoreSelected={storeSelectedValue}
+                propsExtrasAnfitrion={data ? data.extrasAnfitrion : ''}
+                isSelected={whatIsSelectedAnfitrion} />
 
-        <ExtrasEspectaculo 
-        handleStoreSelected={storeSelectedValue}
-        propsExtrasEspectaculo={extrasEspectaculo}
-        isSelected={whatIsSelectedEspectaculo}/>
-    </div>
+            <ExtrasEspectaculo
+                handleStoreSelected={storeSelectedValue}
+                propsExtrasEspectaculo={data ? data.extrasEspectaculo : ''}
+                isSelected={whatIsSelectedEspectaculo} />
+        </div>
 
 
     // SWITCH STATEMENT TO DETERMINE PAGE TO BE RENDERED
-    switch (currParty) {
+    switch (current) {
         case 'loading':
-            displayArray = <LoadingSpinner/>
+            displayArray = <LoadingSpinner />
             break
         case 'pelo':
-            displayArray = pelo ? <Pelo 
-            propsPelo={pelo} 
-            handleStoreSelected={storeSelectedValue}
-            isSelected={whatIsSelectedPelo}/> : ''
+            displayArray = data ? <Pelo
+                propsPelo={data.pelo}
+                handleStoreSelected={storeSelectedValue}
+                isSelected={whatIsSelectedPelo} /> : ''
             break
-            
+
         case 'estetica':
-            displayArray = esteticaCara && esteticaUñas ? esteticaDisplayArray : ''
+            displayArray = data ? esteticaDisplayArray : ''
             break
 
         case 'complementos':
-            displayArray = complementosBebida && complementosComida ? complementosDisplayArray : ''
+            displayArray = data ? complementosDisplayArray : ''
             break
 
         case 'detalles':
-            displayArray = <Detalles 
-            city={location} updateCityValencia={updateLocationValencia} updateCityLliria={updateLocationLliria}
-            num={people} mas={handlePlus} menos={handleMinus} updateNum={updatePeople}
-            nam={name} updateNam={updateName}
-            fecha={date} updateFecha={updateFecha} weekDay={weekDay}
-            hora={hour} updateHora={updateHora}
-            today={props.today}
-            sixMonths={props.sixMonths}
+            displayArray = <Detalles
+                city={details.location} updateCityValencia={updateLocationValencia} updateCityLliria={updateLocationLliria}
+                num={details.people} mas={handlePlus} menos={handleMinus} updateNum={updatePeople}
+                nam={details.name} updateNam={updateName}
+                fecha={details.date} updateFecha={updateFecha} weekDay={details.weekDay}
+                hora={details.hour} updateHora={updateHora}
+                today={props.today}
+                sixMonths={props.sixMonths}
             />
-        break
+            break
 
         case 'extras':
-            displayArray = extrasAnfitrion && extrasEspectaculo ? extrasDisplayArray : ''
+            displayArray = data ? extrasDisplayArray : ''
             break
 
         case 'resumen':
-            displayArray = <Resumen 
-            peloS={peloSelected} 
-            esteticaCS={esteticaCaraSelected} esteticaUS={esteticaUñasSelected} 
-            complementosCS={complementosComidaSelected} complementosBS={complementosBebidaSelected} complementosTS={complementosTodoSelected}
-            city={location} num={people} nam={name} 
-            extrasAS={extrasAnfitrionSelected} extrasES={extrasEspectaculoSelected}
-            subtotal={totalPersona} handleStoreSelected={storeSelectedValue}
-            isSelected={termsSelected}
+            displayArray = <Resumen
+                peloS={selected.pelo}
+                esteticaCS={selected.esteticaCara} esteticaUS={selected.esteticaUñas}
+                complementosCS={selected.complementosComida} complementosBS={selected.complementosBebida} complementosTS={selected.complementosTodo}
+                city={details.location} num={details.people} nam={details.name}
+                extrasAS={selected.extrasAnfitrion} extrasES={selected.extrasEspectaculo}
+                subtotal={totalPersona} handleStoreSelected={storeSelectedValue}
+                isSelected={selected.terms}
             />
             break
-        
+
 
         default: displayArray = 'error'
     }
 
 
-    
+
     let stepPelo = 'step'
-    if (currParty === 'pelo') {
+    if (current === 'pelo') {
         stepPelo = 'step-selected'
-    } else if (peloSelected) {
+    } else if (selected.pelo) {
         stepPelo = 'step-completed'
     }
 
     let stepEstetica = 'step'
-    if (currParty === 'estetica') {
+    if (current === 'estetica') {
         stepEstetica = 'step-selected'
-    } else if (esteticaCaraSelected && esteticaUñasSelected) {
+    } else if (selected.esteticaCara && selected.esteticaUñas) {
         stepEstetica = 'step-completed'
-    } else if (peloSelected) {
+    } else if (selected.pelo) {
         stepEstetica = 'step-selectable'
     }
 
     let stepComplementos = 'step'
-    if (currParty === 'complementos') {
+    if (current === 'complementos') {
         stepComplementos = 'step-selected'
-    } else if ((complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected) {
+    } else if ((selected.complementosBebida && selected.complementosComida) || selected.complementosTodo) {
         stepComplementos = 'step-completed'
-    } else if (esteticaCaraSelected && esteticaUñasSelected) {
+    } else if (selected.esteticaCara && selected.esteticaUñas) {
         stepComplementos = 'step-selectable'
     }
 
     let stepDetalles = 'step'
-    if (currParty === 'detalles') {
+    if (current === 'detalles') {
         stepDetalles = 'step-selected'
-    } else if (name && people && location && date && hour) {
+    } else if (details.name && details.people && details.location && details.date && details.hour) {
         stepDetalles = 'step-completed'
-    } else if ((complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected) {
+    } else if ((selected.complementosBebida && selected.complementosComida) || selected.complementosTodo) {
         stepDetalles = 'step-selectable'
     }
 
     let stepExtras = 'step'
-    if (currParty === 'extras') {
+    if (current === 'extras') {
         stepExtras = 'step-selected'
-    } else if (extrasAnfitrionSelected || extrasEspectaculoSelected) {
+    } else if (selected.extrasAnfitrion || selected.extrasEspectaculo) {
         stepExtras = 'step-completed'
-    } else if (name && people && location) {
+    } else if (details.name && details.people && details.location) {
         stepExtras = 'step-selectable'
     }
 
     let stepResumen = 'step'
-    if (currParty === 'resumen') {
+    if (current === 'resumen') {
         stepResumen = 'step-selected'
-    } else if (termsSelected) {
+    } else if (selected.terms) {
         stepResumen = 'step-completed'
-    } else if (name && people && location) {
+    } else if (details.name && details.people && details.location) {
         stepResumen = 'step-selectable'
     }
 
     const changeToPelo = () => {
-        setCurrParty('pelo')
+        setCurrent('pelo')
     }
 
     const changeToEstetica = () => {
-        peloSelected ? setCurrParty('estetica') : setCurrParty(currParty)
+        selected.pelo ? setCurrent('estetica') : setCurrent(current)
     }
 
     const changeToComplementos = () => {
-        esteticaCaraSelected && esteticaUñasSelected ? setCurrParty('complementos') : setCurrParty(currParty)
+        selected.esteticaCara && selected.esteticaUñas ? setCurrent('complementos') : setCurrent(current)
     }
 
     const changeToDetalles = () => {
-        (complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected ? setCurrParty('detalles') : setCurrParty(currParty)
+        (selected.complementosBebida && selected.complementosComida) || selected.complementosTodo ? setCurrent('detalles') : setCurrent(current)
     }
 
     const changeToExtras = () => {
-        name && people >= 4 && people <= 10 && location && date && hour && ((complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected) ? setCurrParty('extras') : setCurrParty(currParty)
+        details.name && details.people >= 4 && details.people <= 10 && details.location && details.date && details.hour && ((selected.complementosBebida && selected.complementosComida) || selected.complementosTodo) ? setCurrent('extras') : setCurrent(current)
     }
 
     const changeToResumen = () => {
-        name && people >= 4 && people <= 10 && location && ((complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected) ? setCurrParty('resumen') : setCurrParty(currParty)
+        details.name && details.people >= 4 && details.people <= 10 && details.location && ((selected.complementosBebida && selected.complementosComida) || selected.complementosTodo) ? setCurrent('resumen') : setCurrent(current)
     }
 
-    const nextOrBook = currParty === 'resumen' ? 'Reservar' : 'Siguiente'
+    const nextOrBook = current === 'resumen' ? 'Reservar' : 'Siguiente'
 
 
     return (
-        <main className='party-main' id='party-portada'>           
+        <main className='party-main' id='party-portada'>
             <div className='party-header'>
                 <h2 className='party-header__text'>
                     {header}
                 </h2>
             </div>
             <div className='step-box'>
-                    <div className={stepPelo} onClick={changeToPelo}>
-                        <SvgPelo isSelected={currParty} isCompleted={peloSelected !== undefined}/>
-                    </div>
-                    <div className={stepEstetica} onClick={changeToEstetica}>
-                        <SvgEstetica isSelected={currParty} isCompleted={esteticaCaraSelected && esteticaUñasSelected}/>
-                    </div>
-                    <div className={stepComplementos} onClick={changeToComplementos}>
-                        <SvgComplementos isSelected={currParty} isCompleted={(complementosBebidaSelected && complementosComidaSelected) || complementosTodoSelected}/>
-                    </div>
-                    <div className={stepDetalles} onClick={changeToDetalles}>
-                        <SvgDetalles isSelected={currParty} isCompleted={name && people && location}/>
-                    </div>
-                    <div className={stepExtras} onClick={changeToExtras}>
-                        <SvgExtras isSelected={currParty} isCompleted={extrasAnfitrionSelected || extrasEspectaculoSelected}/>
-                    </div>
-                    <div className={stepResumen} onClick={changeToResumen}>
-                        <SvgResumen isSelected={currParty} isCompleted={termsSelected !== ''}/>
-                    </div>
+                <div className={stepPelo} onClick={changeToPelo}>
+                    <SvgPelo isSelected={current} isCompleted={selected.pelo !== undefined} />
+                </div>
+                <div className={stepEstetica} onClick={changeToEstetica}>
+                    <SvgEstetica isSelected={current} isCompleted={selected.esteticaCara && selected.esteticaUñas} />
+                </div>
+                <div className={stepComplementos} onClick={changeToComplementos}>
+                    <SvgComplementos isSelected={current} isCompleted={(selected.complementosBebida && selected.complementosComida) || selected.complementosTodo} />
+                </div>
+                <div className={stepDetalles} onClick={changeToDetalles}>
+                    <SvgDetalles isSelected={current} isCompleted={details.name && details.people && details.location} />
+                </div>
+                <div className={stepExtras} onClick={changeToExtras}>
+                    <SvgExtras isSelected={current} isCompleted={selected.extrasAnfitrion || selected.extrasEspectaculo} />
+                </div>
+                <div className={stepResumen} onClick={changeToResumen}>
+                    <SvgResumen isSelected={current} isCompleted={selected.terms !== ''} />
+                </div>
             </div>
             <div className='party-creator'>
                 <div className='parties'>
@@ -562,9 +530,9 @@ const PartyPersonalizada = (props) => {
                 </div>
                 <div className='button-container'>
                     <ButtonPrev clickedPrev={moveToPrevPage}>Atrás</ButtonPrev>
-                    <ButtonNext clickedNext={moveToNextPage} isDisabled={disableNext}>{nextOrBook}</ButtonNext>  
+                    <ButtonNext clickedNext={moveToNextPage} isDisabled={disableNext}>{nextOrBook}</ButtonNext>
                 </div>
-                
+
             </div>
 
         </main>

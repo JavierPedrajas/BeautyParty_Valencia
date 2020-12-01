@@ -24,6 +24,32 @@
     fill: var(--main-color)
 }
 
+@media only screen and (max-width: 374px) {
+    .features {
+        padding: .2rem 1.5rem 5rem 1rem;
+        
+    }
+    
+    .icon-features{
+        height: 7rem;
+        width: 7rem;
+        fill: var(--main-color)
+    }
+}
+
+@media only screen and (max-height: 755px) {
+    .features {
+        padding: .2rem 1.5rem 5rem 1rem;
+        
+    }
+    
+    .icon-features{
+        height: 7rem;
+        width: 7rem;
+        fill: var(--main-color)
+    }
+}
+
 @media only screen and (min-width: 768px) {
     .icon-features{
         height: 12rem;

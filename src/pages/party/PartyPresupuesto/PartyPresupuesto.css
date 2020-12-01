@@ -262,3 +262,22 @@ input[type=range] {
     }
 
 }
+
+@media only screen and (max-height: 755px) {
+  .party-creator-presupuesto {
+    font-size: 2rem;
+    padding: 1rem 1.5rem 0 1.5rem;
+  }
+
+  input[type=range] {
+    height: 34px;
+    -webkit-appearance: none;
+    margin: 0 0;
+    width: 75%;
+  }
+
+  .party-creator-presupuesto .tyc {
+    font-size: 1.5rem;
+    margin-bottom: .5rem
+  }
+}

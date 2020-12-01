@@ -76,19 +76,96 @@
 .packs-section__container-1 {
     background-image: linear-gradient(to right, var(--pack-dia), var(--pack-dia-light)), url('../../assets/hero-pic/dia.jpg');
     background-position: center bottom;
-    background-size: cover;     
+    background-size: cover;  
 }
 
 .packs-section__container-2 {
     background-image: linear-gradient(to right, var(--pack-cumple), var(--pack-cumple-light)), url('../../assets/hero-pic/cumpleanos.jpg');
     background-position: center;
     background-size: cover;
+
 }
 .packs-section__container-3 {
     background-image: linear-gradient(to right, rgba(var(--main-color-rgb), .8), rgba(var(--main-color-light-rgb), .7)), url('../../assets/hero-pic/noche.jpeg');
     color: var(--text-light);
     background-position: center;
     background-size: cover;
+
+}
+
+@media only screen and (max-width: 370px) {
+
+    .packs-section__container{
+        padding: .5rem 1rem;
+    }
+
+    .packs-section__container-1,
+    .packs-section__container-2,
+    .packs-section__container-3{
+        height: 65%;
+        width: 70%;     
+        background-repeat: no-repeat;  
+    }
+
+.pack-section__container-title{
+    font-size: 3rem;
+}
+
+.packs-section__container__textbox{
+    font-size: 1.6rem;
+}
+
+.packs-section__container__textbox span{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+
+.packs-section__container__pricebutton-price{
+    font-size: 2rem;
+
+}
+
+.packs-section__container__pricebutton-button{
+    display: none;
+}
+
+}
+
+@media only screen and (max-height: 755px) {
+    .packs-section__container{
+        padding: .5rem 1rem;
+    }
+
+    .packs-section__container-1,
+    .packs-section__container-2,
+    .packs-section__container-3{
+        height: 65%;
+        width: 70%;      
+    }
+
+.pack-section__container-title{
+    font-size: 3rem;
+}
+
+.packs-section__container__textbox{
+    font-size: 1.6rem;
+}
+
+.packs-section__container__textbox span{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+
+.packs-section__container__pricebutton-price{
+    font-size: 2rem;
+
+}
+
+.packs-section__container__pricebutton-button{
+    display: none;
+}
 }
 
 
@@ -177,6 +254,18 @@
             left: 50%;
             width: 40%;
     
+        }
+
+        .packs-section__container-1 {
+            background-position: center bottom -15rem;
+        }
+        
+        .packs-section__container-2 {
+            background-position: center bottom -5rem ;
+        }
+        .packs-section__container-3 {
+            background-position: center bottom -15rem;
+
         }
 
     }

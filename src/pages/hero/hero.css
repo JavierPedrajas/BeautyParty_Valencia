@@ -8,6 +8,7 @@
     background-repeat: no-repeat;
     box-sizing: border-box;
     padding: 0 2rem;
+    color: var(--text-light);
 }
     
 
@@ -44,6 +45,54 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 370px) {
+    .hero-textbox{
+        height: 100%;
+        padding-top: 50%;
+    }
+
+
+
+    .title-main {
+        padding-top: 0rem;
+        font-size: 4rem;
+        height: 20%;
+    }
+    
+    
+    .motto {
+        font-size: 3rem;
+        padding: 1rem 0;
+        width: 60%;
+        height: 40%;
+    }
+    
+
+}
+
+@media only screen and (max-height: 755px) {
+    .hero-textbox{
+        height: 100%;
+        padding-top: 50%;
+    }
+
+
+
+    .title-main {
+        padding-top: 0rem;
+        font-size: 4rem;
+        height: 20%;
+    }
+    
+    
+    .motto {
+        font-size: 3rem;
+        padding: 1rem 0;
+        width: 60%;
+        height: 40%;
+    }
 }
 
 

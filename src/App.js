@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import './App.css';
-
 import Hero from './pages/hero/hero'
 import Features from './pages/features/features'
 import Packs from './pages/packs/packs'
@@ -12,7 +10,6 @@ function App() {
 
   const [partyState, setPartyState] = useState('Portada')
   const [packSelected, setPackSelected] = useState('Portada')
-
 
   // Changes Party Status to render "Personalizada" & scrolls to center view + changes Packs section to "Main" 
   const handlePartyPersonalizada = () => {
@@ -76,22 +73,20 @@ const handlePackPortada = () => {
   }
 
   // Establish min and max date selectable at input date fields
-  const today = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // Min date 7 days from today
-  const sixMonths = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // Max date 6 months from today
+  const minDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // Min date 7 days from today
+  const maxDate = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // Max date 6 months from today
 
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Hero goToParty={scrollToParty}/>
-      </header>
+      <Hero goToParty={scrollToParty}/>
       <Features goToParty={scrollToParty}/>
       <Packs currentPack={packSelected} handleDia={handlePackDia} 
       handleCumple={handlePackCumple} handleNoche={handlePackNoche} handlePortada={handlePackPortada}
-      today={today} sixMonths={sixMonths}/>
+      today={minDate} sixMonths={maxDate}/>
       <PartyPortada stateParty={partyState} 
       personalizada={handlePartyPersonalizada} presupuesto={handlePartyPresupuesto} portada={handlePartyPortada}
-      today={today} sixMonths={sixMonths}/>
+      today={minDate} sixMonths={maxDate}/>
       <Footer/>
     </div>
   );

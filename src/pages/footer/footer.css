@@ -67,3 +67,24 @@
         font-size: 1.6rem;
     }
 }
+
+@media only screen and (max-height: 755px) {
+    .footer-title{
+        font-size: 2.8rem;
+    }
+    
+    
+    .footer-links button{
+        font-size: 1.5rem;
+    }
+    
+    .footer-credit{
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    .footer-atribution{
+        font-size: 1.2rem;
+        text-align: center;
+    }
+}

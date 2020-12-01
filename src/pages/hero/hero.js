@@ -5,7 +5,7 @@ import { ButtonHero } from '../../components/button/button'
 const hero = (props) => {
 
     return (
-        <div className='hero'>
+        <header className='hero'>
             <div className='hero-textbox'>
                 <h1 className='title-main'>Bienvenida a tu <span>Beauty Party</span></h1>
                 <h2 className='motto'> Tú imaginas la fiesta, nosotros la montamos</h2>
@@ -13,7 +13,7 @@ const hero = (props) => {
                     <ButtonHero isClicked={props.goToParty}>¡Crea tu fiesta!</ButtonHero>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 

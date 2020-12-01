@@ -8,49 +8,48 @@ import TycModal from '../../footer/tycModal/tycModal'
 import './PartyPresupuesto.css'
 
 
-
 const PartyPresupuesto = (props) => {
 
-    
-
-    const [name, setName] = useState()
-    const [people, setPeople] = useState('')
-    const [date, setDate] = useState()
-    const [hour, setHour] = useState()
-    const [budget, setBudget] = useState(40)
-    const [location, setLocation] = useState()
-
-    const [weekDay, setWeekDay] = useState()
-
     const [modalOpen, setModalOpen] = useState('')
-
     const [termsSelected, setTermsSelected] = useState ('')
+    const [details, setDetails] = useState(
+        {
+            location: '',
+            name: '',
+            people: '',
+            date: '',
+            hour: '',
+            weekDay: '',
+            budget: 40
+        }
+    )
+
 
     let optionsHora
 
-    let dateDateFormat = date ? new Date(date) : ''
-    let dateSummaryFormat = date ? dateDateFormat.getDate() + '/' + (dateDateFormat.getMonth() + 1) + '/' + dateDateFormat.getFullYear() : ''
+    let dateDateFormat = details.date ? new Date(details.date) : ''
+    let dateSummaryFormat = details.date ? dateDateFormat.getDate() + '/' + (dateDateFormat.getMonth() + 1) + '/' + dateDateFormat.getFullYear() : ''
 
    
-    const allChecked = name && people && date && hour && budget && location && termsSelected
+    const allChecked = details.name && details.people && details.date && details.hour && details.budget && details.location && termsSelected
         
     const whatsAppPresupuesto = () => {
-        const nameString = encodeURIComponent('Hola, soy ' + name + '.')
-        const localizacion = location === 'Valencia' ? 'Paul Mitchell Valencia' : 'Nou Calasanz Lliria'
-        const budgetString = encodeURIComponent(budget + '€/persona')
-        const detallesString = encodeURIComponent('Seremos ' + people + ' personas.') + '%0A' + encodeURIComponent('En las instalaciones de ' + localizacion) + '%0A' + encodeURIComponent('Nos gustaría reservar para el día ' + dateSummaryFormat + ' en horario de ' + hour + '.')
+        const nameString = encodeURIComponent('Hola, soy ' + details.name + '.')
+        const localizacion = details.location === 'Valencia' ? 'Paul Mitchell Valencia' : 'Nou Calasanz Lliria'
+        const budgetString = encodeURIComponent(details.budget + '€/persona')
+        const detallesString = encodeURIComponent('Seremos ' + details.people + ' personas.') + '%0A' + encodeURIComponent('En las instalaciones de ' + localizacion) + '%0A' + encodeURIComponent('Nos gustaría reservar para el día ' + dateSummaryFormat + ' en horario de ' + details.hour + '.')
         
 
         window.open(`https://wa.me/34608055822?text=${nameString}%0AMe+gustar%C3%ADa+que+nos+montaseis+una+fiesta+con+el+siguiente+presupuesto%3A%0A${budgetString}%0A${detallesString}%0AQuedamos+a+la+espera+de+confirmaci%C3%B3n+y+detalles`)
 
-        axios.put(`https://beautyparty-valencia.firebaseio.com/sesiones/${name + ' - ' + dateSummaryFormat.replaceAll('/', '-') + ' - Presupuesto'}.json`, 
-            {nombre: name,
-            personas: people,
-            localizacion: location,
-            presupuesto: budget,
-            importe: budget * people,
+        axios.put(`https://beautyparty-valencia.firebaseio.com/sesiones/${details.name + ' - ' + dateSummaryFormat.replaceAll('/', '-') + ' - Presupuesto'}.json`, 
+            {nombre: details.name,
+            personas: details.people,
+            localizacion: details.location,
+            presupuesto: details.budget,
+            importe: details.budget * details.people,
             fecha: dateSummaryFormat,
-            hora: hour
+            hora: details.hour
             })
             .then( res => {
             })
@@ -60,58 +59,57 @@ const PartyPresupuesto = (props) => {
 
 
     const updateLocationValencia = () => {
-        setLocation('Valencia')
+        setDetails({...details, location: 'Valencia'})
     }
     const updateLocationLliria = () => {
-        setLocation('Lliria')
+        setDetails({...details, location: 'Lliria'})
     }
 
 
 
     // Changes name stored
-    const updateName = (e) => {
-        setName(e.target.value)
+    const updateName = e => {
+        setDetails({...details, name: e.target.value})
     }
 
 
     // Changes people selected
-    const updatePeople = (e) => {
-        setPeople(parseInt(e.target.value))
+    const updatePeople = e => {
+        setDetails({...details, people: parseInt(e.target.value)})
     }
 
-    const updateHora = (e) => {
-        setHour(e.target.value)
+    const updateHora = e => {
+        setDetails({...details, hour: e.target.value})
     }
 
-        const updateFecha = (e) => {
+    const updateFecha = e => {
         const dateS = new Date(e.target.valueAsDate)
-        setWeekDay(dateS.getDay())
-        setDate(e.target.value)
+        setDetails({...details, date: e.target.value, weekDay: dateS.getDay()})
     }
 
-    const updateBudget = (e) => {
-        setBudget(e.target.value)
+    const updateBudget = e => {
+        setDetails({...details, budget: e.target.value})
     }
 
     // PLUS AND MINUS HANDLER FOR PEOPLE NUMBER
     const handlePlus = () => {
-        if (people < 4) {
-            setPeople(4)
-        } else if (people < 10) {
-            setPeople(parseInt(people) + 1)
-        } else if (people > 10) {
-            setPeople(10)
+        if (details.people < 4) {
+            setDetails({...details, people: 4})
+        } else if (details.people < 10) {
+            setDetails({...details, people: parseInt(details.people) + 1})
+        } else if (details.people > 10) {
+            setDetails({...details, people: 10})
         }
     }
-    
+
     const handleMinus = () => {
-        if (people < 5) {
-            setPeople(4)
-        } else if (people > 10) {
-            setPeople(10)
-        } else if (people >= 5) {
-            setPeople(parseInt(people) - 1)
-        } 
+        if (details.people < 5) {
+            setDetails({...details, people: 4})
+        } else if (details.people > 10) {
+            setDetails({...details, people: 10})
+        } else if (details.people >= 5) {
+            setDetails({...details, people: parseInt(details.people) - 1})
+        }
     }
 
     const handleOpenModal = () => {
@@ -128,18 +126,18 @@ const PartyPresupuesto = (props) => {
     
     let showModal = modalOpen ? <TycModal closeModal={handleCloseModal}/> : ''
 
-    if (weekDay === 6) {
+    if (details.weekDay === 6) {
         optionsHora = 
-        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={hour ? hour : ''}>
+        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={details.hour ? details.hour : ''}>
             <option value=''>Elige hora</option>
             <option value='14:00 - 16:00'>14:00 - 16:00</option>
             <option value='16:30 - 18:30'>16:30 - 18:30</option>
             <option value='19:00 - 21:00'>19:00 - 21:00</option>
             <option value='21:30 - 23:30'>21:30 - 23:30</option>
         </select>
-    } else if (weekDay === 0) {
+    } else if (details.weekDay === 0) {
         optionsHora = 
-        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={hour ? hour : ''}>
+        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={details.hour ? details.hour : ''}>
             <option value=''>Elige hora</option>
             <option value='09:00 - 11:00'>09:00 - 11:00</option>
             <option value='11:30 - 13:30'>11:30 - 13:30</option>
@@ -148,13 +146,13 @@ const PartyPresupuesto = (props) => {
             <option value='19:00 - 21:00'>19:00 - 21:00</option>
             <option value='21:30 - 23:30'>21:30 - 23:30</option>
         </select>
-    } else if (weekDay > 0 && weekDay < 6) {
+    } else if (details.weekDay > 0 && details.weekDay < 6) {
         optionsHora = 
-        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={hour ? hour : ''}>
+        <select name='hora-input' className='hour-field' onChange={updateHora} defaultValue={details.hour ? details.hour : ''}>
             <option value=''>Elige hora</option>
             <option value='20:30 - 22:30'>20:30 - 22:30</option>
         </select>
-    } else if (!weekDay) {
+    } else if (!details.weekDay) {
         optionsHora = 
         <select name='hora-input' className='hour-field'>
             <option>Por favor elige fecha</option>
@@ -175,7 +173,7 @@ const PartyPresupuesto = (props) => {
             <label htmlFor='name' className='name-container'>
                 <span className='name-tag'>¿Cómo te llamas?</span>
                 <input type='text' name='name' className='name-field' placeholder='Tu nombre' 
-                value={name} onChange={updateName}></input>
+                value={details.name} onChange={updateName}></input>
             </label>
 
             <label htmlFor='pplNumber' className='ppl-container-presupuesto'>
@@ -186,7 +184,7 @@ const PartyPresupuesto = (props) => {
                     </button>
 
                     <input type="number" className="num" placeholder='4-10' min="4" step="1"
-                    id='pplNumber' name='pplNumber' value={people} onChange={updatePeople}/>
+                    id='pplNumber' name='pplNumber' value={details.people} onChange={updatePeople}/>
 
                     <button className="plusplus" onClick={handlePlus} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
@@ -197,8 +195,8 @@ const PartyPresupuesto = (props) => {
             <label htmlFor='budget' className='budget-container'>
                 <span className='name-tag'>¿Presupuesto por persona?</span>
                 <div className='budget-slider'>
-                    <input className='budget-slider-slider' name='budget' type='range' min='40' max='120' step='10' onChange={updateBudget} defaultValue={budget}/>
-                    <span className='budget-slider-tag'>{budget}€</span>
+                    <input className='budget-slider-slider' name='budget' type='range' min='40' max='120' step='10' onChange={updateBudget} defaultValue={details.budget}/>
+                    <span className='budget-slider-tag'>{details.budget}€</span>
 
                 </div>
 
@@ -206,7 +204,7 @@ const PartyPresupuesto = (props) => {
 
             <div className='fecha-input-presupuesto'>
                 <label htmlFor='fecha-input' className='name-tag'>¿Para qué fecha?</label>
-                <input className='date-field'  type='date' name='fecha-input' onChange={updateFecha} defaultValue={date ? date : ''} min={props.today} max={props.sixMonths}/>
+                <input className='date-field'  type='date' name='fecha-input' onChange={updateFecha} defaultValue={details.date ? details.date : ''} min={props.today} max={props.sixMonths}/>
             </div>
             <div className='hora-input-presupuesto'>
                 <label htmlFor='hora-input' className='name-tag'>¿A qué hora os viene bien?</label>
@@ -219,7 +217,7 @@ const PartyPresupuesto = (props) => {
                     <div className='detalles-city-container' >
                         <label htmlFor='valencia' className="btn-radio" onClick={updateLocationValencia}>
                             <input type="radio" id='valencia' name='city' 
-                            checked={location === 'Valencia'} 
+                            checked={details.location === 'Valencia'} 
                             onChange={updateLocationValencia} 
                             />
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
@@ -233,7 +231,7 @@ const PartyPresupuesto = (props) => {
                     <div className='detalles-city-container' >
                     <label htmlFor='lliria' className="btn-radio" onClick={updateLocationLliria}>
                         <input type="radio" id='lliria' name='city' 
-                        checked={location === 'Lliria'} 
+                        checked={details.location === 'Lliria'} 
                         onChange={updateLocationLliria}
                         />
                         <svg width="20px" height="20px" viewBox="0 0 20 20">

@@ -242,6 +242,132 @@
     height: 80%;
 }
 
+@media only screen and (max-width: 370px) {
+    .party-header {
+        padding-top: 1rem;   
+    }
+    
+    .party-header__text{
+        font-size: 2.3rem;
+    }
+    
+    .step-box {
+        top: 13%;
+    }
+    
+    
+    .step {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .step-selectable {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .step-selected {
+        width: 5.5rem;
+        height: 5.5rem;
+        transform: translateY(-5px);
+    }
+    
+    .step-completed {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    .party-creator .component-container:first-child {
+        padding-top: 4rem;
+    }
+    
+    
+    .component-container{
+        padding: .5rem 1rem 1rem 0;
+    }
+
+    
+    .component-price {
+        display: none;
+    }
+
+    .estetica-container{
+        padding-top: 4.5rem
+    }
+    
+    .estetica-container span {
+        font-size: 2.2rem;
+    }
+
+    .button-container {
+        align-items: flex-end;
+    }
+        
+
+}
+
+@media only screen and (max-height: 755px) {
+    .party-header {
+        padding-top: 1rem;   
+    }
+    
+    .party-header__text{
+        font-size: 2.3rem;
+    }
+    
+    .step-box {
+        top: 13%;
+    }
+    
+    
+    .step {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .step-selectable {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .step-selected {
+        width: 5.5rem;
+        height: 5.5rem;
+        transform: translateY(-5px);
+    }
+    
+    .step-completed {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    .party-creator .component-container:first-child {
+        padding-top: 4rem;
+    }
+    
+    
+    .component-container{
+        padding: .5rem 1rem 1rem 0;
+    }
+
+    
+    .component-price {
+        display: none;
+    }
+
+    .estetica-container{
+        padding-top: 4.5rem
+    }
+    
+    .estetica-container span {
+        font-size: 2.2rem;
+    }
+
+    .button-container {
+        align-items: flex-end;
+    }
+}
+
 @media only screen and (min-width: 768px) {
 
     .party-header__text{

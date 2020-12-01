@@ -198,6 +198,93 @@
     text-decoration: underline var(--main-color) ;
 }
 
+@media only screen and (max-width: 370px) {
+  .intro-resumen {
+    padding-top: 3.5rem;
+    font-size: 1.7rem;
+  }
+
+  .checkout-component {
+    font-size: 1.7rem;
+  }
+
+
+  .checkout-item-name{
+    font-size: 1.8rem;
+    font-weight: 300;
+  }
+
+  .resumen-dot{
+    width: .8rem;
+  }
+
+
+  .totales {
+    height: 60%;
+    padding: 0 0 0rem 40%;
+    font-size: 1.2rem;
+  }
+
+  .tyc {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+
+
+  .cbx {
+
+    top: 30%;
+    left: 13%;
+    margin: -12px;
+  }
+
+}
+
+@media only screen and (max-height: 755px) {
+  .intro-resumen {
+    padding-top: 3.5rem;
+    font-size: 1.7rem;
+  }
+
+  .checkout-component {
+    font-size: 1.7rem;
+  }
+
+
+  .checkout-item-name{
+    font-size: 1.8rem;
+    font-weight: 300;
+  }
+
+  .resumen-dot{
+    width: .8rem;
+  }
+
+
+  .totales {
+    height: 60%;
+    padding: 0 0 0rem 40%;
+    font-size: 1.2rem;
+  }
+
+  .tyc {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+
+
+  .cbx {
+
+    top: 30%;
+    left: 13%;
+    margin: -12px;
+  }
+}
+
 
 @media only screen and (min-width: 768px) {
 

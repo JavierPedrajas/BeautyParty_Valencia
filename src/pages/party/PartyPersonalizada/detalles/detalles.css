@@ -189,6 +189,141 @@ input::-webkit-inner-spin-button {
     height: 100%;
 }
 
+@media only screen and (max-width: 370px) {
+    .detalles-container{
+        padding: 3.5rem 2rem 0 2rem;
+        font-size: 2rem;
+
+    }
+
+    .name-container{
+        margin-bottom: 0rem;
+    }
+    
+    .name-container input {
+        height: 4rem;
+    }
+    
+    .name-tag{
+        font-weight: 300;
+        margin-bottom: .1rem;
+    }
+    
+    
+    .wrapper{
+        width: 19rem;
+        height: 4.5rem;
+        margin-bottom: .1rem;
+    }
+    
+    .num {
+        font-size: 2.5rem;
+    }
+    
+    
+    .detalles-city-container{
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        padding: .1rem .5rem .1rem 0;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .detalles-city-container .component-name {
+        margin-top: .2rem;
+        padding: 0 0 0 1rem;
+        font-size: 2rem;
+    }
+    
+    .location-main-text{
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+    
+    .location-secondary-text{
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+        
+    
+    .date-field {
+        height: 3.5rem;
+    }
+    
+    .hour-field {
+        height: 3.5rem;
+    }
+    
+}
+
+@media only screen and (max-height: 755px) {
+    .detalles-container{
+        padding: 3.5rem 2rem 0 2rem;
+        font-size: 2rem;
+
+    }
+
+    .name-container{
+        margin-bottom: 0rem;
+    }
+    
+    .name-container input {
+        height: 4rem;
+    }
+    
+    .name-tag{
+        font-weight: 300;
+        margin-bottom: .1rem;
+    }
+    
+    
+    .wrapper{
+        width: 19rem;
+        height: 4.5rem;
+        margin-bottom: .1rem;
+    }
+    
+    .num {
+        font-size: 2.5rem;
+    }
+    
+    
+    .detalles-city-container{
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        padding: .1rem .5rem .1rem 0;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .detalles-city-container .component-name {
+        margin-top: .2rem;
+        padding: 0 0 0 1rem;
+        font-size: 2rem;
+    }
+    
+    .location-main-text{
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+    
+    .location-secondary-text{
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+        
+    
+    .date-field {
+        height: 3.5rem;
+    }
+    
+    .hour-field {
+        height: 3.5rem;
+    }
+}
+
 
 @media only screen and (min-width: 768px) {
 

@@ -30,6 +30,37 @@
     font-size: 2.1rem;
 }
 
+@media only screen and (max-width: 374px) {
+    
+    .icon-box{
+        width: 50%;
+        text-align: center;
+    }
+        
+    .feature-title {
+        font-size: 2.8rem;
+    }
+    
+    .feature-text {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-height: 755px) {
+    .icon-box{
+        width: 50%;
+        text-align: center;
+    }
+        
+    .feature-title {
+        font-size: 2.8rem;
+    }
+    
+    .feature-text {
+        font-size: 2rem;
+    }
+}
+
 
 @media only screen and (min-width: 768px) {
     .feature-title {
